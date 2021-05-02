@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "rootDirs": ["./"],
     "lib": ["DOM", "ES2015", "ES2016", "ESNext"]
   },
   "exclude": ["node_modules"]
