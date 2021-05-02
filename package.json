@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo 'test is comming soon'",
+    "dev": "npx vite -c ./scripts/vite.config.ts",
     "prepare": "husky install"
   },
   "repository": {
@@ -26,6 +27,15 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
-    "husky": "^6.0.0"
+    "@types/node": "^15.0.1",
+    "@vitejs/plugin-vue": "^1.2.2",
+    "@vue/compiler-sfc": "^3.0.11",
+    "husky": "^6.0.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
+    "vite": "^2.2.3"
+  },
+  "dependencies": {
+    "vue": "^3.0.11"
   }
 }
