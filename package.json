@@ -1,0 +1,31 @@
+{
+  "name": "vite-electron-starter",
+  "version": "1.0.0",
+  "description": "The electron starter with vite. Vite 2, Vue 3, electron 12.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'test is comming soon'",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jardenliu/vite-electron-starter.git"
+  },
+  "keywords": [
+    "vite2",
+    "vue3",
+    "electron",
+    "electron12"
+  ],
+  "author": "jardenliu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jardenliu/vite-electron-starter/issues"
+  },
+  "homepage": "https://github.com/jardenliu/vite-electron-starter#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "husky": "^6.0.0"
+  }
+}
