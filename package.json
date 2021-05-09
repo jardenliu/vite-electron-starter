@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo 'test is comming soon'",
-    "dev": "npx vite -c ./scripts/vite.config.ts",
+    "dev": "npx vite --open -c ./scripts/vite.config.ts",
     "prepare": "husky install"
   },
   "repository": {
@@ -31,6 +31,8 @@
     "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "^3.0.11",
     "chalk": "^4.1.1",
+    "electron": "^12.0.6",
+    "electron-builder": "^22.10.5",
     "husky": "^6.0.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
@@ -38,6 +40,8 @@
     "vite-aliases": "^0.6.2"
   },
   "dependencies": {
-    "vue": "^3.0.11"
+    "vue": "^3.0.11",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
   }
 }
