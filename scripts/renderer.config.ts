@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
+import { resolveSrc } from './utils'
 import vue from '@vitejs/plugin-vue'
-import { aliases } from './renderer.alias'
+import { rendererAliases as alias } from './alias'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    alias: aliases
+    alias
   },
-  root: resolve(__dirname, '../src/renderer'),
+  root: resolveSrc('renderer'),
   plugins: [vue()]
 })
