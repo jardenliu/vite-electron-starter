@@ -9,7 +9,8 @@ import {
 import RendererConfig from './renderer.config'
 import MainConfig from './main.config'
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process'
-const electronPath = require('electron')
+import { AddressInfo } from 'net'
+import * as electronPath from 'electron'
 
 const mode = (process.env.MODE = process.env.MODE || 'development')
 
@@ -25,14 +26,15 @@ const sharedConfig: InlineConfig = {
 
 const startRenderer = async () => {
   const server = await createServer(RendererConfig as any)
-  server.listen(8080)
+  await server.listen()
   return server
 }
 
 const startMainProcess = async (server: ViteDevServer) => {
   const protocol = server.config.server.https ? 'https://' : 'http://'
   const host = server.config.server.host || 'localhost'
-  const port = server.config.server.port || 8080 // TODO: FIX
+  const address = server.httpServer?.address() as AddressInfo
+  const port = address.port
   const path = '/'
   process.env.VITE_DEV_SERVER_URL = `${protocol}${host}:${port}${path}`
 

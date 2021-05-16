@@ -5,6 +5,9 @@ import { rendererAliases as alias } from './alias'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 5500
+  },
   resolve: {
     alias
   },

@@ -8,7 +8,7 @@ export const rendererAliases = getAliases({
 })
 
 export const mainAliases = getAliases({
-  path: 'src/renderer',
+  path: 'src/main',
   prefix: '',
   deep: true,
   depth: 1
