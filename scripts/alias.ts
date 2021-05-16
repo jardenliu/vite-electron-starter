@@ -1,15 +1,28 @@
 import { getAliases } from 'vite-aliases'
+import { sync as fgSync } from 'fast-glob'
 
-export const rendererAliases = getAliases({
-  path: 'src/renderer',
-  prefix: '',
-  deep: true,
-  depth: 1
-})
+const RENDERER_DIR = 'src/renderer'
+const MAIN_DIR = 'src/main'
+const PRELOAD_DIR = 'src/preload'
 
-export const mainAliases = getAliases({
-  path: 'src/main',
-  prefix: '',
-  deep: true,
-  depth: 1
-})
+const getAlias = (path: string) => {
+  const directories = fgSync(`${path}/*`, {
+    onlyDirectories: true,
+    absolute: true,
+    cwd: process.cwd()
+  })
+
+  if (directories.length) {
+    return getAliases({
+      path: 'src/renderer',
+      prefix: '',
+      deep: true,
+      depth: 1
+    })
+  }
+  return {}
+}
+
+export const rendererAliases = getAlias(RENDERER_DIR)
+export const mainAliases = getAlias(MAIN_DIR)
+export const preloadAliases = getAlias(PRELOAD_DIR)

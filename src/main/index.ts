@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import { URL } from 'url'
+import { join } from 'path'
 
 const isSingleInstance = app.requestSingleInstanceLock()
 
@@ -12,6 +13,19 @@ app.disableHardwareAcceleration()
 
 const env = import.meta.env
 
+const installDevExtension = async () => {
+  if (env.DEV) {
+    const { default: installExtension, VUEJS3_DEVTOOLS } = await import(
+      'electron-devtools-installer'
+    )
+    const extension = await installExtension(VUEJS3_DEVTOOLS, {
+      loadExtensionOptions: {
+        allowFileAcess: true
+      }
+    })
+  }
+}
+
 if (env.DEV) {
   app
     .whenReady()
@@ -19,7 +33,8 @@ if (env.DEV) {
     .then(({ default: installExtension, VUEJS3_DEVTOOLS }) =>
       installExtension(VUEJS3_DEVTOOLS, {
         loadExtensionOptions: {
-          allowFileAcess: true
+          allowFileAcess: true,
+          forceDownload: true
         }
       })
     )
@@ -32,7 +47,7 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     show: false,
     webPreferences: {
-      // TODO: preload
+      preload: join(__dirname, '../preload/index.cjs'),
       contextIsolation: env.MODE === 'test',
       enableRemoteModule: env.MODE === 'test'
     }

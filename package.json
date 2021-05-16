@@ -2,7 +2,7 @@
   "name": "vite-electron-starter",
   "version": "1.0.0",
   "description": "The electron starter with vite. Vite 2, Vue 3, electron 12.",
-  "main": "index.js",
+  "main": "dist/main/index.cjs",
   "scripts": {
     "test": "echo 'test is comming soon'",
     "dev": "ts-node --skip-project  ./scripts/dev.ts -O esModuleInterop=true",
@@ -34,6 +34,7 @@
     "electron": "^12.0.6",
     "electron-builder": "^22.10.5",
     "electron-devtools-installer": "^3.2.0",
+    "fast-glob": "^3.2.5",
     "husky": "^6.0.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",

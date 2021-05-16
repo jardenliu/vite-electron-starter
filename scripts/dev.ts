@@ -7,7 +7,6 @@ import {
   LogLevel
 } from 'vite'
 import RendererConfig from './renderer.config'
-import MainConfig from './main.config'
 import { ChildProcessWithoutNullStreams, spawn } from 'child_process'
 import { AddressInfo } from 'net'
 import * as electronPath from 'electron'
@@ -44,17 +43,17 @@ const startMainProcess = async (server: ViteDevServer) => {
 
   return build({
     ...sharedConfig,
-    ...MainConfig,
+    configFile: 'scripts/main.config.ts',
     plugins: [
       {
-        name: 'reload-app-on-main-package-change',
+        name: 'reload-app-on-main-package-changed',
         writeBundle: () => {
           if (spawnProcess !== null) {
             spawnProcess.kill('SIGINT')
             spawnProcess = null
           }
 
-          spawnProcess = spawn(String(electronPath), ['dist/index.cjs'])
+          spawnProcess = spawn(String(electronPath), ['.'])
           spawnProcess.stdout.on(
             'data',
             (d) =>
@@ -74,8 +73,26 @@ const startMainProcess = async (server: ViteDevServer) => {
   })
 }
 
+const startPreloadProcess = (server: ViteDevServer) => {
+  return build({
+    ...sharedConfig,
+    configFile: 'scripts/preload.config.ts',
+    plugins: [
+      {
+        name: 'reload-page-on-preload-package-changed',
+        writeBundle() {
+          server.ws.send({
+            type: 'full-reload'
+          })
+        }
+      }
+    ]
+  })
+}
+
 const main = async () => {
   const server = await startRenderer()
+  await startPreloadProcess(server)
   await startMainProcess(server)
 }
 
