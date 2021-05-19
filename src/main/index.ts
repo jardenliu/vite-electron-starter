@@ -13,19 +13,6 @@ app.disableHardwareAcceleration()
 
 const env = import.meta.env
 
-const installDevExtension = async () => {
-  if (env.DEV) {
-    const { default: installExtension, VUEJS3_DEVTOOLS } = await import(
-      'electron-devtools-installer'
-    )
-    const extension = await installExtension(VUEJS3_DEVTOOLS, {
-      loadExtensionOptions: {
-        allowFileAcess: true
-      }
-    })
-  }
-}
-
 if (env.DEV) {
   app
     .whenReady()
@@ -33,8 +20,7 @@ if (env.DEV) {
     .then(({ default: installExtension, VUEJS3_DEVTOOLS }) =>
       installExtension(VUEJS3_DEVTOOLS, {
         loadExtensionOptions: {
-          allowFileAcess: true,
-          forceDownload: true
+          allowFileAcess: true
         }
       })
     )
